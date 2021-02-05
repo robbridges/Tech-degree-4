@@ -56,12 +56,23 @@
    this.missed ++;
    console.log(this.missed);
    if (this.missed === 5) {
-     this.gameOver();
+     this.gameOver(false);
    }
  }
- 
- gameOver() {
-   console.log(`game over! sorry!`);
+
+ gameOver(won) {
+   const startOverlay = document.querySelector('.start');
+   const gameOverMessage = document.querySelector('#game-over-message');
+   if (!won) {
+    startOverlay.className = 'lose';
+    gameOverMessage.textContent = 'You have lost, but feel free to try again!';
+    startOverlay.style.display = '';
+    console.log(`game over! sorry!`);
+   } if(won) {
+     startOverlay.className = 'win';
+     gameOverMessage.textContent ='You have won, congratulations!';
+     startOverlay.style.display = '';
+   }
  }
 
 
