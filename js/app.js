@@ -4,7 +4,7 @@
 
 const letterLIs = document.querySelector('#phrase').firstElementChild.childNodes
 
-let game = 'null';
+let game = null;
 const resetButton = document.querySelector('#btn__reset');
 resetButton.addEventListener('click', e => {
   game = new Game();

@@ -6,7 +6,7 @@
    constructor() {
      this.missed = 0;
      this.phrases = this.createPhrases();
-     this.activePhrase = 'null';
+     this.activePhrase = null;
    }
  
 /**
@@ -54,6 +54,9 @@
    const lives = document.querySelector("img[src='images/liveHeart.png']");
    lives.src = 'images/broken-heart.png';
    this.missed ++;
+   if (this.missed === 5) {
+    this.gameOver(false);
+  }
  }
  /*
  Game over method, based on the value passed into it we could see changes based on the overlay screen
@@ -89,9 +92,6 @@
    } else {
      button.className = 'wrong';
      game.removeLife();
-     if (this.missed === 5) {
-      this.gameOver(false);
-    }
    }
  }
 
