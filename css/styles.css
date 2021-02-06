@@ -1,5 +1,7 @@
 /* Main styles */
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&Roboto:300');
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
 
 /* Variables */
 
@@ -20,7 +22,7 @@
 
 * {
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -196,7 +198,7 @@ button {
 }
 
 .lose {
-  background-color: #f5785f;
+  background-color: #9c230b;
 }
 
 .lose a {

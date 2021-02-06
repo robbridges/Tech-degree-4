@@ -13,10 +13,19 @@ resetButton.addEventListener('click', e => {
   
   
 })
-
+/*
+Adds the event listeners to the game TODO: Finish key up listener
+*/
 const eventListeners = () => {
   const letterButtons = document.querySelectorAll('.key');
   letterButtons.forEach( button => button.addEventListener('click', e => game.handleInteraction(button)));
+  
+  document.addEventListener('keyup', e => {
+    letterButtons.forEach( button => {
+      if (button.textContent === e.key && !button.disabled && !game.checkForWin() && game.missed !== 5)
+        game.handleInteraction(button);
+    });
+  });
 }
 
 

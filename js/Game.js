@@ -52,7 +52,7 @@
  */
  removeLife() {
    const lives = document.querySelector("img[src='images/liveHeart.png']");
-   lives.src = 'images/lostHeart.png';
+   lives.src = 'images/broken-heart.png';
    this.missed ++;
  }
  /*
@@ -95,11 +95,14 @@
    }
  }
 
+ /*
+ Resets the game back to it's origional state so that the user can begin a fresh game. 
+ */
  reset() {
    this.missed = 0;
    const letterLi = document.querySelectorAll('#phrase li');
    const keyboardButtons = document.querySelectorAll('button');
-   const lostLives = document.querySelectorAll("img[src='images/lostHeart.png']");
+   const lostLives = document.querySelectorAll("img[src='images/broken-heart.png']");
    letterLi.forEach(li => li.remove());
    if (keyboardButtons.textContent !== 'Start Game') {
    keyboardButtons.forEach(button => {
