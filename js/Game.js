@@ -35,7 +35,7 @@
  First action of the game, it is wired to the start game button on the origional overlay
  */
  startGame() {
-   const startOverlay = document.querySelector('.start');
+   const startOverlay = document.querySelector('#overlay');
    startOverlay.style.display = 'none';
    this.activePhrase = this.getRandomPhrase();
    this.activePhrase.addPhraseToDisplay();
@@ -48,32 +48,68 @@
    return !stillHidden.length;
  }
  /*
- updates the heart icon to a lost heart icon TODO: replace with a different image
+ updates the heart icon to a lost heart icon if the guess is incorrect
  */
  removeLife() {
    const lives = document.querySelector("img[src='images/liveHeart.png']");
    lives.src = 'images/lostHeart.png';
    this.missed ++;
-   console.log(this.missed);
-   if (this.missed === 5) {
-     this.gameOver(false);
-   }
  }
-
+ /*
+ Game over method, based on the value passed into it we could see changes based on the overlay screen
+ @Params won (boolean) boolean passed in to dictate what happens when the styling of the overlay
+ */
  gameOver(won) {
-   const startOverlay = document.querySelector('.start');
+   const startOverlay = document.querySelector('#overlay');
    const gameOverMessage = document.querySelector('#game-over-message');
    if (!won) {
     startOverlay.className = 'lose';
     gameOverMessage.textContent = 'You have lost, but feel free to try again!';
     startOverlay.style.display = '';
-    console.log(`game over! sorry!`);
    } if(won) {
      startOverlay.className = 'win';
      gameOverMessage.textContent ='You have won, congratulations!';
      startOverlay.style.display = '';
    }
+   this.reset();
+
  }
+ /*
+ Handles the interaction when a letter is clicked. Rather that be displaying a letter or removing one of hte lives from the player. Tracks the game's internal state
+ @Param button {element} synced to onclick listener based on what happens next 
+ */
+ handleInteraction(button) {
+   button.setAttribute('disabled', true);
+   if (this.activePhrase.checkLetter(button.textContent)) {
+    button.className = 'chosen';
+    this.activePhrase.showMatchedLetter(button.textContent);
+      if (this.checkForWin()) {
+      this.gameOver(true);
+    }
+   } else {
+     button.className = 'wrong';
+     game.removeLife();
+     if (this.missed === 5) {
+      this.gameOver(false);
+    }
+   }
+ }
+
+ reset() {
+   this.missed = 0;
+   const letterLi = document.querySelectorAll('#phrase li');
+   const keyboardButtons = document.querySelectorAll('button');
+   const lostLives = document.querySelectorAll("img[src='images/lostHeart.png']");
+   letterLi.forEach(li => li.remove());
+   if (keyboardButtons.textContent !== 'Start Game') {
+   keyboardButtons.forEach(button => {
+     button.className = 'key';
+     button.removeAttribute('disabled');
+   });
+  }
+   lostLives.forEach( lives => lives.src ='images/liveHeart.png');
+ }
+
 
 
 

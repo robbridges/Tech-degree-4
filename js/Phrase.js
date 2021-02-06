@@ -36,7 +36,7 @@
     const letters =document.querySelectorAll(`.${letter}`);
     if (this.checkLetter(letter)) {
       letters.forEach(letter => letter.className = `show letter ${letter}`);
-    }
+    }    
   }
  }
  
